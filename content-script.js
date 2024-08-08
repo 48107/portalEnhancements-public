@@ -1,23 +1,21 @@
-const link = window.location.search.slice(6);
-// const jwt = leaky leaky
-console.log("PAY ATTTENTION")
+const link = window.location.search.slice(6); // Grab link login location
 
-fetch("myText.txt")
-  .then((res) => res.text())
-  .then((text) => {
-    // do something with "text"
-    console.log(text)
-    console.log("we made it here!")
-   })
-  .catch((e) => console.error(e));
+// Function to grab JWT stored in local JSON
+function getResourceContent(fileName) {
+  return fetch(chrome.runtime.getURL(`resources/${fileName}`))
+  .then(resp => resp.json());
+}
 
-
-// if (link == null) {
-//   window.location.replace(
-//     "https://skcportal.stkevins.vic.edu.au/api/session?jwt="+jwt
-//   );
-// } else {
-//   window.location.replace(
-//     "https://skcportal.stkevins.vic.edu.au/api/session?redirect="+link+"&jwt="+jwt
-//   );
-// }
+// Grabs JSON
+getResourceContent("file.json").then(content => {
+  jwt = content.jwt
+  if (link == null) {
+    window.location.replace(
+      "https://skcportal.stkevins.vic.edu.au/api/session?jwt="+jwt
+    );
+  } else {
+    window.location.replace(
+      "https://skcportal.stkevins.vic.edu.au/api/session?redirect="+link+"&jwt="+jwt
+    );
+  }
+});
