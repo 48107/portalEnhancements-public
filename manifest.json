@@ -3,12 +3,11 @@
   "description": "Add Enhancements to the Portal like Autologin and more!",
   "version": "0.14",
   "manifest_version": 3,
-  "permissions": ["storage", "activeTab", "scripting"],
+  "permissions": ["storage", "activeTab", "scripting", "import"],
   "content_scripts": [
     {
       "matches": ["*://skcportal.stkevins.vic.edu.au/login*"],
-      "js": ["content-script.js"],
-      "css": ["login-button.css"]
+      "js": ["content-script.js"]
     },
     {
       "matches": ["*://skcportal.stkevins.vic.edu.au/*"],

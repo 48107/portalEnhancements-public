@@ -1,8 +1,10 @@
 const tiles = document.getElementsByClassName("tile");
 const tileList = document.getElementsByClassName("tileList");
 
-const infoList = document.getElementsByClassName("information-list");
+const infoList = document.getElementsByClassName("information-list"); 
 const fcListEvent = document.getElementsByClassName("fc-list-table");
+
+const GradientTable = ["#FFFFFF", "#fa4a47", "#f36f45", "#ec9144", "#e4b144", "#dccc44", "rgb(204 229 17)", "#9dca45", "#7cc047", "#61b549", "#4fa74f", "#549a63"];
 
 setTimeout(calendarList, 1500);
 
@@ -55,47 +57,35 @@ for (let i = 0; i < tileList.length; i++) {
 }
 tiles[tiles.length - 1].style.marginRight = "0";
 
-console.log(infoList);
-for (let i = 0; i < infoList[2].children.length; i++) {
-  infoList[2].children[i].style.backgroundColor = "#8dbeffb0";
-  infoList[2].children[i].style.marginBottom = "0.6rem";
-  infoList[2].children[i].style.borderRadius = "5px";
-  infoList[2].children[i].style.border = "2px solid #70aeff";
-  infoList[2].children[i].style.boxShadow = "0.8px 4px 18px 0 #0c27274d";
+// Initial Due Work Styling Setup for Cards
+for (let i = 0; i < infoList[1].children.length; i++) {
+  // Styling the cards
+  infoList[1].children[i].style.backgroundColor = "#8dbeffb0";
+  infoList[1].children[i].style.marginBottom = "0.6rem";
+  infoList[1].children[i].style.borderRadius = "5px";
+  infoList[1].children[i].style.border = "2px solid #70aeff";
+  infoList[1].children[i].style.boxShadow = "0.8px 4px 18px 0 #0c27274d";
 }
-infoList[2].style.backgroundColor = "#ededed";
+// Removes background white from in-between cards
+infoList[1].parentElement.style.backgroundColor = "#ededed";
 
-for (let i = 0; i < infoList[2].children.length; i++) {
-  const infoItem = infoList[2].children[i];
+// Due Work Border Styling
+for (let i = 0; i < infoList[1].children.length; i++) {
+  const infoItem = infoList[1].children[i];
 
-  gradientBorder(infoItem, "gradient-10", "#549a63");
-  gradientBorder(infoItem, "gradient-9", "#4fa74f");
-  gradientBorder(infoItem, "gradient-8", "#61b549");
-  gradientBorder(infoItem, "gradient-7", "#7cc047");
-  gradientBorder(infoItem, "gradient-6", "#9dca45");
-  gradientBorder(infoItem, "gradient-5", "rgb(204 229 17)");
-  gradientBorder(infoItem, "gradient-4", "#dccc44");
-  gradientBorder(infoItem, "gradient-3", "#e4b144");
-  gradientBorder(infoItem, "gradient-2", "#ec9144");
-  gradientBorder(infoItem, "gradient-1", "#f36f45");
-  gradientBorder(infoItem, "gradient-0", "#fa4a47");
-}
+  // Gets the border colour corresponding to time till due
+  const infoGradientIndex = infoItem.querySelector("span").classList[0].replace(/\D/g, '');
+  // console.log(infoGradientIndex)
+  const colour = GradientTable[infoGradientIndex];
 
-// for (let i = 0; i < calendarTable.getElementsByClassName('fc-day').length; i++) {
-
-// }
-
-function gradientBorder(infoItem, grad, colour) {
-  if (infoItem.querySelector("span").classList[0] === grad) {
-    infoItem.style.border = "2px solid " + colour;
-  }
+  infoItem.style.border = "2px solid " + colour; // Styles the border
 }
 
 function calendarList() {
   const calendar = document.getElementById("calendar");
   const calendarTable = calendar.querySelector("tbody");
 
-  console.log(calendarTable);
+  // console.log(calendarTable);
   calendarCard(calendarTable);
   calendar.querySelector("table").style.background = "#ededed";
   return calendarTable;
@@ -103,7 +93,7 @@ function calendarList() {
 
 function calendarCard(calendarTable) {
   const calendarDays = calendarTable.querySelectorAll(".fc-day");
-  console.log(calendarDays.length);
+  // console.log(calendarDays.length);
   // let x = 1==1;
   // for (let i = 0; i < calendarDays.length; i++) {
   //   while (x) {
@@ -127,7 +117,7 @@ function calendarCard(calendarTable) {
     //   divEl.children[elNum].append(calendarTable.children[0]);
     // }
 
-    console.log(element);
+    // console.log(element);
     element.classList.forEach(className => {
       if (className === "fc-day") {
         // const divy = document.createElement('div');
@@ -137,20 +127,20 @@ function calendarCard(calendarTable) {
         // console.log('divEl');
         // console.log(divEl);
 
-        console.log('Success!');
+        // console.log('Success!');
         console.log(calendarTable.children[i-1]);
         calendarTable.children[i-1].style.marginBottom = "2rem";
       } else {
         element.style.background = 'white';
-        console.log('broke here?');
-        console.log(element);
+        // console.log('broke here?');
+        // console.log(element);
         // console.log(divEl);
         // divEl.children[elNum].append(element);
       }
     });
 
     // calendarTable.append(divEl);
-    console.log(element.classList);
-    console.log('element.classList');
+    // console.log(element.classList);
+    // console.log('element.classList');
   }
 }
